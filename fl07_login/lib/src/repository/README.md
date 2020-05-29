@@ -1,0 +1,1 @@
+Tầng chuyên sử lý dữ liệu, gọi API

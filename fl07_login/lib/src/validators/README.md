@@ -1,0 +1,1 @@
+Chuyên xử lý tính hợp lệ của dữ liệu
