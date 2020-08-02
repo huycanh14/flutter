@@ -1,15 +1,34 @@
-import 'package:flutter/material.dart';
-import 'package:greate_places_app/widgets/iamge_input.dart';
+import 'dart:io';
 
-class AddPlaceSreen extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:greate_places_app/providers/great_places.dart';
+import 'package:greate_places_app/widgets/image_input.dart';
+import 'package:provider/provider.dart';
+
+class AddPlaceScreen extends StatefulWidget {
   static const routerName = '/add-place';
 
   @override
-  _AddPlaceSreenState createState() => _AddPlaceSreenState();
+  _AddPlaceScreenState createState() => _AddPlaceScreenState();
 }
 
-class _AddPlaceSreenState extends State<AddPlaceSreen> {
+class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _titleController = TextEditingController();
+  File _pickedImage;
+
+  void _selectImage(File pickImage) {
+    _pickedImage = pickImage;
+  }
+
+  void _savedPlace() {
+    if (_titleController.text.isEmpty || _pickedImage == null) {
+      return;
+    }
+    Provider.of<GreatPlaces>(context, listen: false)
+        .addPlace(_titleController.text, _pickedImage);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +50,10 @@ class _AddPlaceSreenState extends State<AddPlaceSreen> {
                       ),
                       controller: _titleController,
                     ),
-                    SizedBox(height:  10.0, ),
-                    ImageInput()
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    ImageInput(_selectImage)
                   ],
                 ),
               ),

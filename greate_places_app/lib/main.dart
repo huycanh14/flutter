@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greate_places_app/screens/add_place_screen.dart';
-import './providers/great_place.dart';
+import 'providers/great_places.dart';
 import 'package:provider/provider.dart';
 
 import './screens/places_list_screen.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: GreatePlace(),
+      value: GreatPlaces(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Greate Places',
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         home: PlacesListScreen(),
         routes: {
-          AddPlaceSreen.routerName: (cxt) => AddPlaceSreen()
+          AddPlaceScreen.routerName: (cxt) => AddPlaceScreen()
         }
       ),
     );

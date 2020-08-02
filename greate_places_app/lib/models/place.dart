@@ -16,13 +16,13 @@ class PlaceLoction {
 class Place {
   final String id;
   final String title;
-  final PlaceLoction locations;
-  final File images;
+  final PlaceLoction location;
+  final File image;
 
   Place({
     @required this.id,
     @required this.title,
-    @required this.locations,
-    @required this.images,
+    @required this.location,
+    @required this.image,
   });
 }
