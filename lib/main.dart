@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'app/routes.dart';
 import 'ui/views/account/login/login_view.dart';
 
 void main() {
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginView()
+      home: LoginView(),
+      routes: routes,
     );
   }
 }

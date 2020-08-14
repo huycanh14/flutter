@@ -101,9 +101,12 @@ class _LoginViewState extends State<LoginView> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
-                                'Đăng ký tài khoản',
-                                style: textHomeRoute,
+                              FlatButton(
+                                onPressed: () =>  Navigator.pushNamed(context, '/registration'),
+                                child: Text(
+                                  'Đăng ký tài khoản',
+                                  style: textHomeRoute,
+                                ),
                               ),
                               Text(
                                 'Quên mật khẩu',
