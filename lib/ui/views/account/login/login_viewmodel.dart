@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:login_app/models/account.dart';
 
-import '../../../models/account.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginViewModel extends BaseViewModel {

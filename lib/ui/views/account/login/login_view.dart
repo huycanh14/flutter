@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/constants/background_const.dart';
 import 'package:login_app/constants/text_const.dart';
 import 'package:stacked/stacked.dart';
 
@@ -19,13 +20,7 @@ class _LoginViewState extends State<LoginView> {
               title: Text("Thông tin đăng nhâp"),
             ),
             body: Container(
-              decoration: BoxDecoration(
-                gradient: RadialGradient(
-                  focal: Alignment.center,
-                  radius: 2.0,
-                  colors: [Color(0xffc9ebe6), Color(0xfff746fc)],
-                )
-              ),
+              decoration: backgroundSign,
               alignment:  Alignment.center,
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
