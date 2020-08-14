@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "376325050148",
+    "firebase_url": "https://quanlynguoidung-demo.firebaseio.com",
+    "project_id": "quanlynguoidung-demo",
+    "storage_bucket": "quanlynguoidung-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376325050148:android:a964f5aacb0265eceaedb1",
+        "android_client_info": {
+          "package_name": "com.example.login_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376325050148-lu7prcmp3qcmnqfvm04oviehhp0534d6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMxloDBOy5ezVH96qYUHywxVpChbPGL1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376325050148-lu7prcmp3qcmnqfvm04oviehhp0534d6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
