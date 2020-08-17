@@ -19,3 +19,6 @@ samples, guidance on mobile development, and a full API reference.
 Muốn kiểm tra trạng thái đăng nhập thì có 2 cách:
 1. Tạo middleware 
 2. Sử dụng Stream
+
+
+auth_grard: bộ định tuyến phân quyền

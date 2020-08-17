@@ -22,6 +22,7 @@ class _HomeViewState extends State<HomeView> {
           body: Center(
           child: Text(
               'HomeView',
+              style: TextStyle(color: Colors.blue),
             ),
           ),
         );
