@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -10,22 +11,25 @@ class AuthService {
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
     } catch (err) {
-      print(err.toString());
       return null;
     }
   }
-  // create user obj based on FirebaseUser 
+
+  // create user obj based on FirebaseUser
   FirebaseUser _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? user : null;
   }
-
-  // Auth change user stream
-  // Stream<FirebaseUser> get user {
-  //   return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
-  // }
-
   // Sign in with email and password
-  
+
+  signInWithEmailAndPassword({@required email, @required password}) async {
+    try {
+      AuthResult user = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return _userFromFirebaseUser(user.user);
+    } catch (err) {
+      return null;
+    }
+  }
 
   //register with email, password
 

@@ -54,6 +54,7 @@ class _LoginViewState extends State<LoginView> {
                             Padding(
                               padding: EdgeInsets.all(10.0),
                               child: TextFormField(
+                                controller: model.password,
                                 validator: (value) {
                                   return model.checkValidatePassword(value);
                                 },
@@ -79,7 +80,7 @@ class _LoginViewState extends State<LoginView> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     if (_formKey.currentState.validate()) {
-                                      print(model.email.text)
+                                      model.signInWithEmailAndPassword()
                                     }
                                   },
                                   textColor: Colors.white,

@@ -1,3 +1,5 @@
+import 'package:login_app/services/auth.dart';
+
 class Account {
   String _uid = "";
   String _email = "";
@@ -13,25 +15,16 @@ class Account {
   DateTime get birthday => _birthday;
   bool get gender => _gender;
 
-
-  /*Account.signIn({
-    @required email,
-    @required password,
-  }) {
-    this._email = email;
-    this._password = password;
+  void updateEmail(String email) {
+    _email = email;
   }
 
-  Account(
-      {@required email,
-      @required password,
-      @required username,
-      @required birthday,
-      @required gender}) {
-    this._email = email;
-    this._password = password;
-    this._username = username;
-    this._birthday = birthday;
-    this._gender = gender;
-  }*/
+  void updatePassword(String password) {
+    _password = password;
+  }
+
+  final _auth = new AuthService();
+  signInWithEmailAndPassword() {
+    return _auth.signInWithEmailAndPassword(email: _email, password: _password);
+  }
 }

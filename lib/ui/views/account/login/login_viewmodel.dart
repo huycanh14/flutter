@@ -25,4 +25,15 @@ class LoginViewModel extends BaseViewModel {
     if (value.isEmpty) return "Password bạn đang để trống";
     return null;
   }
+
+  signInWithEmailAndPassword() {
+    _account.updateEmail(_email.text);
+    _account.updatePassword(_password.text);
+    var request = _account.signInWithEmailAndPassword();
+    if (request != null) {
+      print(request.toString());
+    } else {
+      print('asdad');
+    }
+  }
 }
