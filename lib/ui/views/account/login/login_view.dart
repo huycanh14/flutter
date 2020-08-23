@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:login_app/app/router/router.gr.dart';
 import 'package:login_app/constants/background_const.dart';
 import 'package:login_app/constants/text_const.dart';
+import 'package:login_app/ui/widgets/dialogs/warning.dart';
 import 'package:stacked/stacked.dart';
 
 import 'login_viewmodel.dart';
@@ -21,102 +24,113 @@ class _LoginViewState extends State<LoginView> {
             ),
             body: Container(
               decoration: backgroundSign,
-              alignment:  Alignment.center,
+              alignment: Alignment.center,
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
-                child: Column( 
-                  mainAxisSize:  MainAxisSize.min,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Form(
-                       key: _formKey,
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                controller: model.email,
-                                validator: (value) {
-                                  return model.checkValidateEmail(value);
-                                },
-                                decoration: InputDecoration(
-                                  labelText: "Nhập email của bạn",
-                                  border: new OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                    borderSide: new BorderSide(),
-                                  ),
-                                  icon: const Padding(
-                                      padding: const EdgeInsets.only(top: 15.0),
-                                      child: const Icon(Icons.email)),
+                      key: _formKey,
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: TextFormField(
+                              controller: model.email,
+                              validator: (value) {
+                                return model.checkValidateEmail(value);
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Nhập email của bạn",
+                                border: new OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: new BorderSide(),
                                 ),
-                                keyboardType: TextInputType.emailAddress,
+                                icon: const Padding(
+                                    padding: const EdgeInsets.only(top: 15.0),
+                                    child: const Icon(Icons.email)),
                               ),
+                              keyboardType: TextInputType.emailAddress,
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                controller: model.password,
-                                validator: (value) {
-                                  return model.checkValidatePassword(value);
-                                },
-                                decoration: InputDecoration(
-                                  labelText: "Nhập mật khẩu của bạn",
-                                  border: new OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                    borderSide: new BorderSide(),
-                                  ),
-                                  icon: const Padding(
-                                      padding: const EdgeInsets.only(top: 15.0),
-                                      child: const Icon(Icons.lock)),
-                                  suffixIcon: IconButton(
-                                      icon: Icon(Icons.visibility), onPressed: null),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: TextFormField(
+                              controller: model.password,
+                              validator: (value) {
+                                return model.checkValidatePassword(value);
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Nhập mật khẩu của bạn",
+                                border: new OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: new BorderSide(),
                                 ),
-                                obscureText: true,
+                                icon: const Padding(
+                                    padding: const EdgeInsets.only(top: 15.0),
+                                    child: const Icon(Icons.lock)),
+                                suffixIcon: IconButton(
+                                    icon: Icon(Icons.visibility),
+                                    onPressed: null),
                               ),
+                              obscureText: true,
                             ),
-                            Padding(padding: EdgeInsets.all(20)),
-                            Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                height: MediaQuery.of(context).size.height * 0.08,
-                                child: RaisedButton(
-                                  onPressed: () => {
-                                    if (_formKey.currentState.validate()) {
-                                      model.signInWithEmailAndPassword()
+                          ),
+                          Padding(padding: EdgeInsets.all(20)),
+                          Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              height: MediaQuery.of(context).size.height * 0.08,
+                              child: RaisedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState.validate()) {
+                                    var req = await model
+                                        .signInWithEmailAndPassword();
+                                    if (req == true) {
+                                      ExtendedNavigator.root.push(Routes.homeView);
+                                    } else {
+                                      return showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              WarningDialog(title: "Lỗi đăng nhập", message: "Thông tin đăng nhập chưa đúng"));
                                     }
-                                  },
-                                  textColor: Colors.white,
-                                  color: Colors.lightGreen,
-                                  child: Text(
-                                    'Đăng nhập',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  padding: EdgeInsets.all(0),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                )),
+                                  }
+                                },
+                                textColor: Colors.white,
+                                color: Colors.lightGreen,
+                                child: Text(
+                                  'Đăng nhập',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                padding: EdgeInsets.all(0),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            FlatButton(
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, '/registration'),
+                              child: Text(
+                                'Đăng ký tài khoản',
+                                style: textHomeRoute,
+                              ),
+                            ),
+                            Text(
+                              'Quên mật khẩu',
+                              style: textHomeRoute,
+                            )
                           ],
                         ),
                       ),
-                      Container(
-                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              FlatButton(
-                                onPressed: () =>  Navigator.pushNamed(context, '/registration'),
-                                child: Text(
-                                  'Đăng ký tài khoản',
-                                  style: textHomeRoute,
-                                ),
-                              ),
-                              Text(
-                                'Quên mật khẩu',
-                                style: textHomeRoute,
-                              )
-                            ],
-                          ),
-                      ),
-                       ),
+                    ),
                   ],
                 ),
               ),

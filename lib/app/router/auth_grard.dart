@@ -5,6 +5,6 @@ class AuthGuard extends RouteGuard {
   @override
   Future<bool> canNavigate(ExtendedNavigatorState navigator, String routeName, Object arguments) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token_key') != null;
+    return prefs.getString('access_token') == null;
   }
 }

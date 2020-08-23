@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:login_app/app/config/interceptors.dart';
 import 'package:login_app/constants/url_const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountService {
   var dio = new Dio();
@@ -9,14 +11,27 @@ class AccountService {
   Future<dynamic> signInWithEmailAndPassword(
       String email, String password) async {
     try {
+      dio.interceptors.add(HttpInterceptors());
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
       Response response = await dio.post(
           "${ENV.URL_API}${ENV.APP_API}${ENV.APP_ACCOUNT}${ENV.APP_LOGOPT_ENDPOINT}",
           data: jsonEncode({"email": email, "password": password}));
-      print("vao day");
-      print(response);
+      _prefs.setString('refresh_token', response.data["refresh_token"]);
+      return getAccessToken();
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
+  Future<dynamic> getAccessToken() async {
+    try {
+      dio.interceptors.add(HttpInterceptors());
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      Response response = await dio.post(
+          "${ENV.URL_API}${ENV.APP_API}${ENV.APP_ACCOUNT}${ENV.APP_TOKEN_ENDPOINT}");
+      _prefs.setString('refresh_token', response.data['refresh_token']);
       return response;
     } on DioError catch (e) {
-      print(e.response);
       return e.response;
     }
   }

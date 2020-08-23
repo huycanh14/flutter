@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:login_app/models/account.dart';
 
@@ -26,14 +27,17 @@ class LoginViewModel extends BaseViewModel {
     return null;
   }
 
-  signInWithEmailAndPassword() {
+  signInWithEmailAndPassword() async {
     _account.updateEmail(_email.text);
     _account.updatePassword(_password.text);
-    var request = _account.signInWithEmailAndPassword();
-    if (request != null) {
-      print(request.toString());
+    var request = await _account.signInWithEmailAndPassword();
+    if (request.statusCode == 200) {
+      print('ok');
+      return true;
     } else {
-      print('asdad');
+      print('false');
+      return false;
     }
   }
+
 }

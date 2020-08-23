@@ -14,7 +14,10 @@ Future main() async {
 
 Future<void> setInitialRoute() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  if (prefs.getString('accountData') != null) {
+  prefs.getString('refresh_token');
+  print('test');
+  if (prefs.getString('refresh_token') != null &&
+      prefs.getString('access_token') != null) {
     initialRoute = Routes.homeView;
   } else {
     initialRoute = Routes.loginView;
