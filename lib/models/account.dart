@@ -1,3 +1,5 @@
+import 'package:login_app/services/account.dart';
+
 class Account {
   String _uid = "";
   String _email = "";
@@ -22,6 +24,7 @@ class Account {
   }
 
   signInWithEmailAndPassword() {
-    return "";
+    return AccountService()
+        .signInWithEmailAndPassword(email, password);
   }
 }

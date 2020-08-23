@@ -1,14 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:login_app/app/router/auth_grard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'app/config/interceptors.dart';
 import 'app/router/router.gr.dart';
 
 var initialRoute;
-void main() async {
-  await DotEnv().load('.env');
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // The point is to add WidgetsFlutterBinding.ensureInitialized() in the first line of the main class
   await setInitialRoute();
@@ -33,7 +30,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    interceptors();
   }
 
   @override
