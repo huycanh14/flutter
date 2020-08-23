@@ -87,12 +87,15 @@ class _LoginViewState extends State<LoginView> {
                                     var req = await model
                                         .signInWithEmailAndPassword();
                                     if (req == true) {
-                                      ExtendedNavigator.root.push(Routes.homeView);
+                                       Navigator.pushReplacementNamed(context, Routes.homeView );
                                     } else {
                                       return showDialog(
                                           context: context,
                                           builder: (BuildContext context) =>
-                                              WarningDialog(title: "Lỗi đăng nhập", message: "Thông tin đăng nhập chưa đúng"));
+                                              WarningDialog(
+                                                  title: "Lỗi đăng nhập",
+                                                  message:
+                                                      "Thông tin đăng nhập chưa đúng"));
                                     }
                                   }
                                 },
