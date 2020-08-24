@@ -31,13 +31,6 @@ class LoginViewModel extends BaseViewModel {
     _account.updateEmail(_email.text);
     _account.updatePassword(_password.text);
     var request = await _account.signInWithEmailAndPassword();
-    if (request.statusCode == 200) {
-      print('ok');
-      return true;
-    } else {
-      print('false');
-      return false;
-    }
+    return request.statusCode == 200;
   }
-
 }

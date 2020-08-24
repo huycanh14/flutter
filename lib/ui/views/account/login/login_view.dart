@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/app/router/router.gr.dart';
 import 'package:login_app/constants/background_const.dart';

@@ -14,14 +14,12 @@ Future main() async {
 
 Future<void> setInitialRoute() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.getString('refresh_token');
-  print('test');
   if (prefs.getString('refresh_token') != null &&
       prefs.getString('access_token') != null) {
     initialRoute = Routes.homeView;
   } else {
     initialRoute = Routes.loginView;
-  }
+  } // Library fix line
 }
 
 class MyApp extends StatefulWidget {

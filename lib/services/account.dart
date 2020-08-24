@@ -17,7 +17,7 @@ class AccountService {
           "${ENV.URL_API}${ENV.APP_API}${ENV.APP_ACCOUNT}${ENV.APP_LOGOPT_ENDPOINT}",
           data: jsonEncode({"email": email, "password": password}));
       _prefs.setString('refresh_token', response.data["refresh_token"]);
-      return getAccessToken();
+      return await getAccessToken();
     } on DioError catch (e) {
       return e.response;
     }
@@ -29,7 +29,7 @@ class AccountService {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       Response response = await dio.post(
           "${ENV.URL_API}${ENV.APP_API}${ENV.APP_ACCOUNT}${ENV.APP_TOKEN_ENDPOINT}");
-      _prefs.setString('refresh_token', response.data['refresh_token']);
+      _prefs.setString('access_token', response.data['access_token']);
       return response;
     } on DioError catch (e) {
       return e.response;

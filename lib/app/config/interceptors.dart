@@ -13,7 +13,6 @@ class HttpInterceptors extends Interceptor {
     dio.interceptors.clear();
     dio.interceptors.requestLock.lock();
     dio.interceptors.responseLock.lock();
-    print('goi lai');
     var _url = "${ENV.URL_API}${ENV.APP_API}${ENV.APP_ACCOUNT}";
     if (_options.path == "$_url${ENV.APP_LOGOPT_ENDPOINT}" &&
         _options.method == 'POST') {
@@ -60,7 +59,7 @@ class HttpInterceptors extends Interceptor {
       dio.interceptors.requestLock.unlock();
       dio.interceptors.responseLock.unlock();
       final response = await dio.post("${ENV.URL_API}${ENV.APP_API}${ENV.APP_ACCOUNT}${ENV.APP_TOKEN_ENDPOINT}");
-      _prefs.setString('access_token', response.data.access_token);
+      _prefs.setString('access_token', response.data["access_token"]);
       if (response.statusCode == 200) {
         // Gọi lại phương thức trước đó(thao tác xử lý trước, recall action)
         return dio.request(
